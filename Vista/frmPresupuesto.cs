@@ -32,8 +32,9 @@ namespace CargaPresupuesto.Vista
             llenarcombomeses();
         
             lblUsuario.Text = Environment.UserName;
-           // dgvPresupuesto.Columns["PRESUPUESTO"].DefaultCellStyle.Format = "C";
+            // dgvPresupuesto.Columns["PRESUPUESTO"].DefaultCellStyle.Format = "C";
             // cargaranio();
+            MessageBox.Show("Prueba de  Git");
         }
 
 
