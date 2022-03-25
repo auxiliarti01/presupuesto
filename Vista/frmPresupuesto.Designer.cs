@@ -395,6 +395,7 @@ namespace CargaPresupuesto.Vista
             this.Name = "frmPresupuesto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "  ";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPresupuesto_Load);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

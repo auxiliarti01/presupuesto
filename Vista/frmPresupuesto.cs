@@ -22,7 +22,7 @@ namespace CargaPresupuesto.Vista
         {
             InitializeComponent();
         }
-        
+
 
         private void frmPresupuesto_Load(object sender, EventArgs e)
         {
@@ -30,11 +30,11 @@ namespace CargaPresupuesto.Vista
             llenarcombo();
             llenarcombocargaranios();
             llenarcombomeses();
-        
+
             lblUsuario.Text = Environment.UserName;
             // dgvPresupuesto.Columns["PRESUPUESTO"].DefaultCellStyle.Format = "C";
             // cargaranio();
-            MessageBox.Show("Prueba de  Git");
+            //MessageBox.Show("Prueba de  Git");
         }
 
 
@@ -50,32 +50,65 @@ namespace CargaPresupuesto.Vista
             CADPresupuesto funcion = new CADPresupuesto();
             try
             {
-                foreach(DataGridViewRow row in dgvPresupuesto.Rows)
-                {
-                    
-                    
-                    DateTime fecha = DateTime.Now;
-                    string usuario = Environment.UserName;
-                    lPresupuesto presupuesto = new lPresupuesto();
-                    
-                    presupuesto.FechaCreacion = fecha;
-                    presupuesto.UsuarioCreacion = usuario;
-                    presupuesto.CodigoVendedor = Convert.ToString(row.Cells["CODIGO VENDEDOR"].Value);
-                    presupuesto.Ano = Convert.ToInt32(row.Cells["AÑO"].Value);
-                    presupuesto.Mes = Convert.ToInt32(row.Cells["MES"].Value);
-                    presupuesto.Presupuesto =Convert.ToInt32(row.Cells["PRESUPUESTO"].Value);
-                    fecha = Convert.ToDateTime(row.Cells["FECHA CREACION"].Value);
-                    usuario =Convert.ToString(row.Cells["USUARIO CREACION"].Value);
+                DateTime fecha = DateTime.Now;
+                string usuario = Environment.UserName;
 
-                    funcion.Insertar(presupuesto);
+                foreach (DataGridViewRow row in dgvPresupuesto.Rows)
+                 {
 
-                }
+                    
+                    
+                    CADMestra.Abrir();
+                    SqlCommand cmd = new SqlCommand("spInsertar_Presupuesto", CADMestra.conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", Convert.ToInt32(row.Cells["ID"].Value));
+                    cmd.Parameters.AddWithValue("@ANIO", Convert.ToInt32(row.Cells["AÑO"].Value));
+                    cmd.Parameters.AddWithValue("@MES", Convert.ToInt32(row.Cells["MES"].Value));
+                    cmd.Parameters.AddWithValue("@VENDEDOR_CODIGO", Convert.ToString(row.Cells["CODIGO VENDEDOR"].Value));
+                    cmd.Parameters.AddWithValue("@PRESUPUESTO", Convert.ToInt32(row.Cells["PRESUPUESTO"].Value));
+                    //cmd.Parameters.AddWithValue("@FECHA_CREA", Convert.ToDateTime(row.Cells["FECHA CREACION"].Value));
+                    cmd.Parameters.AddWithValue("@USUARIO_CREACION", usuario);
+                    cmd.Parameters.AddWithValue("@USUARIO_MODIFICACION", usuario);
+                    cmd.ExecuteNonQuery();
+
+
+                    //DateTime fecha = DateTime.Now;
+                    // string usuario = Environment.UserName;
+                    // lPresupuesto presupuesto = new lPresupuesto();
+
+                    // presupuesto.FechaCreacion = fecha;
+                    // presupuesto.UsuarioCreacion = usuario;
+                    // presupuesto.CodigoVendedor = Convert.ToString(row.Cells["CODIGO VENDEDOR"].Value);
+                    // presupuesto.Ano = Convert.ToInt32(row.Cells["AÑO"].Value);
+                    // presupuesto.Mes = Convert.ToInt32(row.Cells["MES"].Value);
+                    // presupuesto.Presupuesto =Convert.ToInt32(row.Cells["PRESUPUESTO"].Value);
+                    // fecha = Convert.ToDateTime(row.Cells["FECHA CREACION"].Value);
+                    // usuario =Convert.ToString(row.Cells["USUARIO CREACION"].Value);
+
+                    // funcion.Insertar(presupuesto);
+
+                 }
+
+
+                //int index = 0;
+                //DateTime fecha = DateTime.Now;
+                //string usuario = Environment.UserName;
+                //lPresupuesto presupuesto = new lPresupuesto();
+                //presupuesto.FechaCreacion = fecha;
+                //presupuesto.UsuarioCreacion = usuario;
+                //presupuesto.CodigoVendedor = dgvPresupuesto.Rows[index].Cells["CODIGO VENDEDOR"].Value.ToString();
+                //presupuesto.Ano = int.Parse(dgvPresupuesto.Rows[index].Cells["AÑO"].Value.ToString());
+                //presupuesto.Mes = int.Parse(dgvPresupuesto.Rows[index].Cells["MES"].Value.ToString());
+                //presupuesto.Presupuesto = int.Parse(dgvPresupuesto.Rows[index].Cells["PRESUPUESTO"].Value.ToString());
+                //fecha = DateTime.Parse(dgvPresupuesto.Rows[index].Cells["FECHA CREACION"].Value.ToString());
+                //usuario =dgvPresupuesto.Rows[index].Cells["FECHA CREACION"].Value.ToString();
+                //funcion.Insertar(presupuesto);
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
+
             }
         }
 
@@ -84,19 +117,19 @@ namespace CargaPresupuesto.Vista
             CADPresupuesto funcion = new CADPresupuesto();
             try
             {
-                foreach(DataGridViewRow row in dgvPresupuesto.Rows)
+                foreach (DataGridViewRow row in dgvPresupuesto.Rows)
                 {
                     string usuario = Environment.UserName;
                     lPresupuesto presupuesto = new lPresupuesto();
-                    presupuesto.Id =Convert.ToInt32(row.Cells["ID"].Value);
-                    if (row.Cells["ID"].Value.Equals(presupuesto.Id))
-                    {
-                        presupuesto.Presupuesto = Convert.ToInt32(row.Cells["PRESUPUESTO"].Value);
-                        presupuesto.FechaModificacion = Convert.ToDateTime(row.Cells["FECHA MODIFICACION"].Value);
-                        presupuesto.UsuarioModificacion = usuario;
-                        funcion.Modificar(presupuesto);
-                    }
-                   
+                    presupuesto.Id = Convert.ToInt32(row.Cells["ID"].Value);
+                    //if (row.Cells["ID"].Value.Equals(presupuesto.Id))
+                    //{
+                    presupuesto.Presupuesto = Convert.ToInt32(row.Cells["PRESUPUESTO"].Value);
+                    //presupuesto.FechaModificacion = Convert.ToDateTime(row.Cells["FECHA MODIFICACION"].Value);
+                    presupuesto.UsuarioModificacion = usuario;
+                    funcion.Modificar(presupuesto);
+                    //}
+
                 }
             }
             catch (Exception ex)
@@ -128,19 +161,19 @@ namespace CargaPresupuesto.Vista
             dt = funcion.BuscarPresupuesto(txtBuscar.Text);
             dgvPresupuesto.DataSource = dt;
         }
-       
+
         private void BuscarporDistrito()
         {
             string tex = cmbAnio.Text;
-            if(cmbAnio.Text== "- Todos -")
+            if (cmbAnio.Text == "- Todos -")
             {
-                tex =cmbAnio.ValueMember = "0";
+                tex = cmbAnio.ValueMember = "0";
             }
             DataTable dt;
             CADPresupuesto funcion = new CADPresupuesto();
             dt = funcion.BuscarDistrito(cmbDistrito.ValueMember, tex, cmbMes.ValueMember);
             dgvPresupuesto.DataSource = dt;
-            for (int i=0; i <= dgvPresupuesto.Columns.Count-1; i++)
+            for (int i = 0; i <= dgvPresupuesto.Columns.Count - 1; i++)
             {
                 dgvPresupuesto.Columns[i].ReadOnly = dgvPresupuesto.Columns[i].Name.Equals("PRESUPUESTO") ? false : true;
             }
@@ -170,7 +203,7 @@ namespace CargaPresupuesto.Vista
         {
             switch (cmbDistrito.Text)
             {
-                    
+
                 case "CENTRO":
                     cmbDistrito.ValueMember = "CENTRO";
                     break;
@@ -244,7 +277,7 @@ namespace CargaPresupuesto.Vista
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             BuscarporDistrito();
-           
+
         }
 
         private void llenarcombocargaranios()
@@ -259,17 +292,17 @@ namespace CargaPresupuesto.Vista
                 cmbAnio.Items.Add("- Todos -");
                 for (int i = 2018; i <= anio; i++)
                 {
-          
+
                     cmbAnio.Items.Add(i);
                 }
-                if(cmbAnio.Text == "- Todos -")
+                if (cmbAnio.Text == "- Todos -")
                 {
                     cmbAnio.ValueMember = "0";
 
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -342,7 +375,7 @@ namespace CargaPresupuesto.Vista
                     break;
 
             }
-            
+
         }
 
         private void cmbAnio_SelectedIndexChanged(object sender, EventArgs e)
@@ -352,8 +385,8 @@ namespace CargaPresupuesto.Vista
 
         private void deshabilitarcolumnas()
         {
-            
-           
+
+
             //dgvPresupuesto.Columns["CODIGO VENDEDOR"].ReadOnly = true;
             //this.dgvPresupuesto.Columns[0].ReadOnly = false;
             //dgvPresupuesto.SelectedColumns[0].ReadOnly = false;
@@ -363,7 +396,7 @@ namespace CargaPresupuesto.Vista
         private void btnModificar_Click(object sender, EventArgs e)
         {
             mostrarpresupuesto();
-            MessageBox.Show("PRESUPUESTO MODIFICADO CORRECTAMENTE","MODIFICACION",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("PRESUPUESTO MODIFICADO CORRECTAMENTE", "MODIFICACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //BuscarporDistrito();
         }
 
@@ -392,12 +425,12 @@ namespace CargaPresupuesto.Vista
 
         private void OnlyNumbers_keyPress(object sender, KeyPressEventArgs e)
         {
-           
+
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
             {
-                
+
                 e.Handled = true;
-                
+
                 System.Media.SystemSounds.Beep.Play();
             }
         }
@@ -409,7 +442,7 @@ namespace CargaPresupuesto.Vista
                 dgvPresupuesto.Columns[8].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("es-CO");
                 dgvPresupuesto.Columns[8].DefaultCellStyle.Format = "C0";
             }
-            
+
         }
     }
 }
