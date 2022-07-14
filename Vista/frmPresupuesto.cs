@@ -26,7 +26,7 @@ namespace CargaPresupuesto.Vista
 
         private void frmPresupuesto_Load(object sender, EventArgs e)
         {
-
+            btnModificar.Visible = false;
             llenarcombo();
             llenarcombocargaranios();
             llenarcombomeses();
@@ -35,17 +35,110 @@ namespace CargaPresupuesto.Vista
             // dgvPresupuesto.Columns["PRESUPUESTO"].DefaultCellStyle.Format = "C";
             // cargaranio();
             //MessageBox.Show("Prueba de  Git");
+           
         }
 
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            insertarpresupuesto();
-            MessageBox.Show("PRESUPUESTO INGRESADO CORRECTAMENTE", "PRESUPUESTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            insertarcargapresupuesto();
+            //insertarpresupuesto();
+            
             //BuscarporDistrito();
         }
 
-        private void insertarpresupuesto()
+        private void insertarcargapresupuesto()
+        {
+            
+            try
+            {
+                CADPresupuesto funcion = new CADPresupuesto();
+                DataTable dt;
+                DataColumn column;
+                DataRow row;
+
+                dt = new DataTable();
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.Int32");
+                column.ColumnName = "ID";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.Int32");
+                column.ColumnName = "ANO";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.Int32");
+                column.ColumnName = "MES";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = "VENDEDOR_CODIGO";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.Int32");
+                column.ColumnName = "PRESUPUESTO";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.DateTime");
+                column.ColumnName = "FECHA_CREA";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.DateTime");
+                column.ColumnName = "FECHA_MODIFICA";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = "USUARIO_CREACION";
+                dt.Columns.Add(column);
+
+                column = new DataColumn();
+                column.DataType = Type.GetType("System.String");
+                column.ColumnName = "USUARIO_MOFICACION";
+                dt.Columns.Add(column);
+
+                foreach (DataGridViewRow data in dgvPresupuesto.Rows)
+                {
+                    row = dt.NewRow();
+                    row["ID"] = data.Cells["ID"].Value;
+                    row["ANO"] = data.Cells["AÑO"].Value;
+                    row["MES"] = data.Cells["MES"].Value;
+                    row["VENDEDOR_CODIGO"] = data.Cells["CODIGO VENDEDOR"].Value;
+                    row["PRESUPUESTO"] = data.Cells["PRESUPUESTO"].Value;
+                    row["FECHA_CREA"] = data.Cells["FECHA CREACION"].Value;
+                    row["FECHA_MODIFICA"] = DateTime.Now;
+                    row["USUARIO_CREACION"] = data.Cells["USUARIO CREACION"].Value;
+                    row["USUARIO_MOFICACION"] = lblUsuario.Text;
+                    dt.Rows.Add(row);
+                    
+                }
+               int mes =int.Parse(cmbMes.Text);
+               //int ano=int.Parse(cmbAnio.Text);
+                if (funcion.Insertar2(dt, mes))
+                {
+                    MessageBox.Show("PRESUPUESTO INGRESADO CORRECTAMENTE", "PRESUPUESTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("no es posible");
+                }
+
+                // 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+                
+            }
+        }
+
+        /*private void insertarpresupuesto()
         {
             CADPresupuesto funcion = new CADPresupuesto();
             try
@@ -110,7 +203,7 @@ namespace CargaPresupuesto.Vista
                 MessageBox.Show(ex.Message);
 
             }
-        }
+        }*/
 
         private void mostrarpresupuesto()
         {
@@ -164,6 +257,10 @@ namespace CargaPresupuesto.Vista
 
         private void BuscarporDistrito()
         {
+            string usuario = Environment.UserName;
+            DateTime fecha = DateTime.Today;
+            
+
             string tex = cmbAnio.Text;
             if (cmbAnio.Text == "- Todos -")
             {
@@ -171,17 +268,39 @@ namespace CargaPresupuesto.Vista
             }
             DataTable dt;
             CADPresupuesto funcion = new CADPresupuesto();
-            dt = funcion.BuscarDistrito(cmbDistrito.ValueMember, tex, cmbMes.ValueMember);
-            dgvPresupuesto.DataSource = dt;
-            for (int i = 0; i <= dgvPresupuesto.Columns.Count - 1; i++)
+            dt = funcion.BuscarDistrito(cmbDistrito.ValueMember, tex, cmbMes.ValueMember,lblUsuario.Text);
+            dgvPresupuesto.DataSource = dt;  
+                for (int i = 0; i <= dgvPresupuesto.Columns.Count - 1; i++)
+                {
+
+                    dgvPresupuesto.Columns[i].ReadOnly = dgvPresupuesto.Columns[i].Name.Equals("PRESUPUESTO") ? false : true;
+
+
+                }
+           
+            /*foreach (DataGridViewRow row in dgvPresupuesto.Rows)
             {
-                dgvPresupuesto.Columns[i].ReadOnly = dgvPresupuesto.Columns[i].Name.Equals("PRESUPUESTO") ? false : true;
-            }
+                if (!row.IsNewRow)
+                {
+                    row.Cells["FECHA CREACION"].Value = fecha.ToShortDateString();
+                    row.Cells["FECHA MODIFICACION"].Value = fecha.ToShortDateString();
+                    row.Cells["USUARIO CREACION"].Value = usuario;
+                    row.Cells["USUARIO MODIFICACION"].Value = usuario;
+
+                }
+            }*/
+
+
+
 
             //dgvPresupuesto.Columns[8].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-US");
             //dgvPresupuesto.Columns[8].DefaultCellStyle.Format = "C2";
 
 
+        }
+        private void agregarcolumnsvacias()
+        {
+            
         }
         private void pcbBuscar_Click(object sender, EventArgs e)
         {
@@ -443,6 +562,13 @@ namespace CargaPresupuesto.Vista
                 dgvPresupuesto.Columns[8].DefaultCellStyle.Format = "C0";
             }
 
+        }
+
+        private void dgvPresupuesto_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            //string usuario = Environment.UserName;
+            //DateTime fecha = DateTime.Now;
+            //e.Row.Cells["FECHA_CREA"].Value = fecha;
         }
     }
 }

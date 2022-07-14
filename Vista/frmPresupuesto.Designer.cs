@@ -37,8 +37,9 @@ namespace CargaPresupuesto.Vista
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.btnInsertar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.pcbBuscar = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -54,6 +55,7 @@ namespace CargaPresupuesto.Vista
             this.lblDistrito = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -61,11 +63,13 @@ namespace CargaPresupuesto.Vista
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbBuscar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPresupuesto)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -99,8 +103,8 @@ namespace CargaPresupuesto.Vista
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.panel9);
             this.panel3.Controls.Add(this.btnModificar);
-            this.panel3.Controls.Add(this.btnInsertar);
             this.panel3.Controls.Add(this.pcbBuscar);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.txtBuscar);
@@ -110,20 +114,14 @@ namespace CargaPresupuesto.Vista
             this.panel3.Size = new System.Drawing.Size(1070, 63);
             this.panel3.TabIndex = 1;
             // 
-            // btnModificar
+            // panel9
             // 
-            this.btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnModificar.FlatAppearance.BorderSize = 0;
-            this.btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(196)))), ((int)(((byte)(108)))));
-            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnModificar.Location = new System.Drawing.Point(895, 16);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(95, 31);
-            this.btnModificar.TabIndex = 6;
-            this.btnModificar.Text = "MODIFICAR";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.panel9.Controls.Add(this.btnInsertar);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel9.Location = new System.Drawing.Point(889, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(181, 63);
+            this.panel9.TabIndex = 7;
             // 
             // btnInsertar
             // 
@@ -132,13 +130,28 @@ namespace CargaPresupuesto.Vista
             this.btnInsertar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(196)))), ((int)(((byte)(108)))));
             this.btnInsertar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsertar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnInsertar.Location = new System.Drawing.Point(783, 16);
+            this.btnInsertar.Location = new System.Drawing.Point(8, 16);
             this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(95, 31);
+            this.btnInsertar.Size = new System.Drawing.Size(165, 31);
             this.btnInsertar.TabIndex = 5;
-            this.btnInsertar.Text = "AGREGAR";
+            this.btnInsertar.Text = "AGREGAR/MODIFICAR";
             this.btnInsertar.UseVisualStyleBackColor = true;
             this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModificar.FlatAppearance.BorderSize = 0;
+            this.btnModificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(117)))), ((int)(((byte)(196)))), ((int)(((byte)(108)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnModificar.Location = new System.Drawing.Point(621, 13);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(95, 31);
+            this.btnModificar.TabIndex = 6;
+            this.btnModificar.Text = "MODIFICAR";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // pcbBuscar
             // 
@@ -222,6 +235,7 @@ namespace CargaPresupuesto.Vista
             this.dgvPresupuesto.TabIndex = 5;
             this.dgvPresupuesto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPresupuesto_CellFormatting);
             this.dgvPresupuesto.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPresupuesto_CellValueChanged);
+            this.dgvPresupuesto.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvPresupuesto_DefaultValuesNeeded);
             this.dgvPresupuesto.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvPresupuesto_EditingControlShowing);
             // 
             // panel5
@@ -331,7 +345,7 @@ namespace CargaPresupuesto.Vista
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.lblUsuario);
+            this.panel7.Controls.Add(this.panel10);
             this.panel7.Controls.Add(this.panel1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel7.Location = new System.Drawing.Point(0, 579);
@@ -339,11 +353,20 @@ namespace CargaPresupuesto.Vista
             this.panel7.Size = new System.Drawing.Size(1230, 30);
             this.panel7.TabIndex = 8;
             // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.lblUsuario);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel10.Location = new System.Drawing.Point(1065, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(85, 30);
+            this.panel10.TabIndex = 2;
+            // 
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
             this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblUsuario.Location = new System.Drawing.Point(1053, 6);
+            this.lblUsuario.Location = new System.Drawing.Point(5, 6);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(75, 19);
             this.lblUsuario.TabIndex = 1;
@@ -400,13 +423,15 @@ namespace CargaPresupuesto.Vista
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbBuscar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPresupuesto)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -440,5 +465,7 @@ namespace CargaPresupuesto.Vista
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
     }
 }

@@ -42,6 +42,38 @@ namespace CargaPresupuesto.Datos
             }
         }
 
+        public bool Insertar2(DataTable dt,int mes)
+        {
+            try
+            {
+               
+                CADMestra.Abrir();
+                SqlCommand cmd = new SqlCommand("spInsertar_Presupuesto", CADMestra.conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@TABLA_PRESUPUESTO", dt);
+                cmd.Parameters.AddWithValue("@MES",mes);
+                //cmd.Parameters.AddWithValue("@ANO", ano);
+                if(cmd.ExecuteNonQuery() != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+               
+            }
+            finally
+            {
+                CADMestra.Cerrar();
+            }
+        }
+
         public void Modificar(lPresupuesto presupuesto)
         {
             try
@@ -200,7 +232,7 @@ namespace CargaPresupuesto.Datos
             
         //}
 
-        public DataTable BuscarDistrito(string distrito,string anio,string mes)
+        public DataTable BuscarDistrito(string distrito,string anio,string mes,string usuario)
         {
             try
             {
@@ -210,6 +242,7 @@ namespace CargaPresupuesto.Datos
                 cmd.Parameters.AddWithValue("@DISTRITO", distrito);
                 cmd.Parameters.AddWithValue("@ANIO", anio);
                 cmd.Parameters.AddWithValue("@MES", mes);
+                cmd.Parameters.AddWithValue("@USUARIO", usuario);
                 if(cmd.ExecuteNonQuery() != 0)
                 {
                     DataTable dt = new DataTable();
