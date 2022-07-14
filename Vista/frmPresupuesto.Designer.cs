@@ -233,6 +233,7 @@ namespace CargaPresupuesto.Vista
             this.dgvPresupuesto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPresupuesto.Size = new System.Drawing.Size(1070, 348);
             this.dgvPresupuesto.TabIndex = 5;
+            this.dgvPresupuesto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPresupuesto_CellDoubleClick);
             this.dgvPresupuesto.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPresupuesto_CellFormatting);
             this.dgvPresupuesto.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPresupuesto_CellValueChanged);
             this.dgvPresupuesto.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvPresupuesto_DefaultValuesNeeded);

@@ -12,8 +12,6 @@ namespace CargaPresupuesto.Datos
 {
     class CADPresupuesto
     {
-    
-       
         public void Insertar(lPresupuesto presupuesto)
         {
             try
@@ -41,7 +39,6 @@ namespace CargaPresupuesto.Datos
                 CADMestra.Cerrar();
             }
         }
-
         public bool Insertar2(DataTable dt,int mes)
         {
             try
@@ -73,7 +70,6 @@ namespace CargaPresupuesto.Datos
                 CADMestra.Cerrar();
             }
         }
-
         public void Modificar(lPresupuesto presupuesto)
         {
             try
@@ -127,42 +123,6 @@ namespace CargaPresupuesto.Datos
                 CADMestra.Cerrar();
             }
         }
-
-        //public DataTable MostrarPresupuesto()
-        //{
-
-        //    try
-        //    {
-
-        //        CADMestra.Abrir();
-        //        SqlCommand cmd = new SqlCommand("proc_mostrar_presupuestos", CADMestra.conexion);
-        //        if (cmd.ExecuteNonQuery() != 0)
-        //        {
-        //            DataTable dt = new DataTable();
-        //            totaldatos = dt;
-        //            Total = dt.Rows.Count;
-        //            MaximoPagi = Math.Ceiling(Total / CantporPagina);
-        //            SqlDataAdapter data = new SqlDataAdapter(cmd);
-        //            DataSet set = new DataSet();
-        //            data.Fill(dt);
-        //            return dt;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        MessageBox.Show(ex.Message);
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        CADMestra.Cerrar();
-        //    }
-        //}
         public DataTable BuscarPresupuesto(string letra)
         {
             try
@@ -194,10 +154,6 @@ namespace CargaPresupuesto.Datos
                 CADMestra.Cerrar();
             }
         }
-
-
-
-
 
         //public DataTable LlenarCombo()
         //{

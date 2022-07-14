@@ -570,5 +570,13 @@ namespace CargaPresupuesto.Vista
             //DateTime fecha = DateTime.Now;
             //e.Row.Cells["FECHA_CREA"].Value = fecha;
         }
+
+        private void dgvPresupuesto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            frmCambioPresupuesto frmCambio = new frmCambioPresupuesto();
+            frmCambio.txtCodigo.Text = dgvPresupuesto.SelectedCells[1].Value.ToString();
+            
+            frmCambio.ShowDialog();
+        }
     }
 }
