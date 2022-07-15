@@ -575,7 +575,10 @@ namespace CargaPresupuesto.Vista
         {
             frmCambioPresupuesto frmCambio = new frmCambioPresupuesto();
             frmCambio.txtCodigo.Text = dgvPresupuesto.SelectedCells[1].Value.ToString();
-            
+            frmCambio.txtNombreUsuario.Text = dgvPresupuesto.SelectedCells[5].Value.ToString();
+            frmCambio.txtAnio.Text = dgvPresupuesto.SelectedCells[6].Value.ToString();
+            frmCambio.txtMes.Text=dgvPresupuesto.SelectedCells[7].Value.ToString();
+            frmCambio.txtPresupuesto.Text = dgvPresupuesto.SelectedCells[8].Value.ToString();
             frmCambio.ShowDialog();
         }
     }

@@ -93,6 +93,8 @@ namespace CargaPresupuesto.Datos
             }
         }
 
+        
+
         public DataTable MostrarPresupuesto()
         {
             try
@@ -251,6 +253,38 @@ namespace CargaPresupuesto.Datos
             {
                 CADMestra.Cerrar();
             }
+        }
+
+        public bool ModificarPresupuesto2(lPresupuesto lpresupuesto)
+        {
+            try
+            {
+                CADMestra.Abrir();
+                SqlCommand cmd = new SqlCommand("spModificarPresupuesto2", CADMestra.conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@CODIGO", lpresupuesto.CodigoVendedor);
+                cmd.Parameters.AddWithValue("@ANIO", lpresupuesto.Ano);
+                cmd.Parameters.AddWithValue("@MES", lpresupuesto.Mes);
+                cmd.Parameters.AddWithValue("@PRESUPUESTO", lpresupuesto.Presupuesto);
+                if(cmd.ExecuteNonQuery() != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                CADMestra.Cerrar();
+            }
+
         }
     }
 }
